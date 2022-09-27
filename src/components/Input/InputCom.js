@@ -1,16 +1,18 @@
 import React from "react";
 import "./inputCom.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function InputCom(props) {
+  var inputCom;
   useEffect(() => {
-    var inputCom = document.getElementById(props.inputId);
-    // console.log(inputCom);
-    var removeError = function () {
-      inputCom.classList.remove("error");
-    };
-    removeError();
+    inputCom = document.getElementById(props.inputId);
   });
+  const handleChange = (event) => {
+    if (inputCom.classList.contains("error")) {
+      inputCom.classList.remove("error");
+    }
+    props.setValue(event.target.value);
+  };
 
   return (
     <div className="input-component">
@@ -20,8 +22,7 @@ export default function InputCom(props) {
           id={props.inputId}
           required
           className={`input ${props.className}`}
-          onChange={(event) => props.setValue(event.target.value)}
-          // onChange={(event) => removeError()}
+          onChange={handleChange}
           value={props.value}
         ></input>
         <label className="input-label">{props.placeholder}</label>

@@ -16,9 +16,9 @@ export default function Register() {
     e.preventDefault();
 
     const data = {
-      user_name: document.getElementById("user_name").value,
-      email: document.getElementById("email").value,
-      password: document.getElementById("user_pass").value,
+      user_name: document.getElementById("register_user_name-input").value,
+      email: document.getElementById("register_email-input").value,
+      password: document.getElementById("register_pass-input").value,
     };
     axios
       .post("http://localhost:4000/customer/register", data, {
@@ -52,6 +52,7 @@ export default function Register() {
             inputType="text"
             placeholder="User name"
             id="user_name"
+            inputId="register_user_name-input"
             className="input-com"
             setValue={setUserName}
             value={userName}
@@ -60,6 +61,7 @@ export default function Register() {
             inputType="text"
             placeholder="Email address"
             id="email"
+            inputId="register_email-input"
             className="input-com"
             setValue={setEmail}
             value={email}
@@ -68,6 +70,7 @@ export default function Register() {
             inputType="password"
             placeholder="Password"
             id="user_pass"
+            inputId="register_pass-input"
             className="input-com"
             setValue={setPass}
             value={pass}

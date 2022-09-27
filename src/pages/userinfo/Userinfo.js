@@ -38,7 +38,9 @@ export default function Userinfo() {
           <h2>Favorite restaurants: {userInfo.favorite_restaurants}</h2>
         </div>
       ) : (
-        <h1>please Login to view Info</h1>
+        <div className="logged-out-user-info">
+          <h1>please Login to view Info</h1>
+        </div>
       )}
     </>
   );

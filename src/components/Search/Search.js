@@ -31,10 +31,9 @@ export const Search = ({
 
   return (
     <input
-      {...passedProps}
-      id="search"
+      id="restaurant_search"
       placeholder={placeholder}
-      onChange={passedProps.handleSearch}
+      onChange={passedProps.handlesearch}
     />
   );
 };

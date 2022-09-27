@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Search } from "components/Search/Search";
 import "./imhungry.css";
+import { Link } from "react-router-dom";
 const axios = require("axios").default;
 
 export default function ImHungry() {
@@ -15,46 +16,54 @@ export default function ImHungry() {
       .catch((err) => {
         console.log(err);
       });
+    
   }, []);
 
-  function HandleSearch() {
+  const handleSearch = () => {
     var allRestaurants = document.getElementsByClassName(
       "restaurant-container"
     );
-    var input = document.getElementById("search");
+    var input = document.getElementById("restaurant_search");
 
     var arr = Array.from(allRestaurants);
-    arr.forEach((restaurant) => {
-      restaurant.hidden = true;
+    arr.forEach((restaurant, i) => {
+      // restaurant.hidden = true;
+      allRestaurants[i].hidden = true;
     });
 
     arr.forEach((element) => {
-      var name = element.getAttribute("restaurantName");
+      var name = element.getAttribute("restaurantname");
       if (name.includes(input.value)) {
         element.hidden = false;
       }
     });
-  }
+  };
 
   return (
     <>
-      <div className="search-container">
-        <Search
-          placeholder="Search for restaurants..."
-          handleSearch={HandleSearch}
-        />
-
-        {restaurants.map((restaurant) => {
-          return (
-            <div
-              className="restaurant-container"
-              hidden={false}
-              restaurantName={restaurant.name}
-            >
-              <h1 className="restaurant-name">{restaurant.name}</h1>
-            </div>
-          );
-        })}
+      <div className="search_page">
+        <div className="search_input">
+          <Search
+            placeholder="Search for restaurants..."
+            handlesearch={handleSearch}
+          />
+        </div>
+        <div className="restaurants_list">
+          {restaurants.map((restaurant) => {
+            return (
+              <div
+                className="restaurant-container"
+                hidden={false}
+                restaurantname={restaurant.name}
+                key={restaurant.id}
+              >
+                <Link className="link" to={`/restaurant/${restaurant.id}`}>
+                  {restaurant.name}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );
